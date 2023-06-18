@@ -66,7 +66,7 @@
             <section class="dashboard-authors my-5">
                 <div class="row my-4">
                     <div class="col-lg-12 col-md-8 col-sm-12">
-                        <h4 class="card-title text-secondary">Kelola Penulis (Pemberi Pekerjaan)</h4>
+                        <h4 class="card-title text-secondary">Kelola Perusahaan (Pemberi Pekerjaan)</h4>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead class="thead-inverse">
@@ -96,7 +96,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button class="btn primary-outline-btn disabled">Jumlah total penulis terdaftar
+                        <button class="btn primary-outline-btn disabled">Jumlah total Perusahaan terdaftar
                             ({{ $recentAuthors->total() }}) </button>
 
                         <div class="d-flex justify-content-center mt-4 custom-pagination">
