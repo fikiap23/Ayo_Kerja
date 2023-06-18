@@ -42,7 +42,7 @@ class CompanySeeder extends Seeder
                 'employment' => 'Part time',
                 'education' => 'bachelors',
             ], [
-                'title' => 'Maths Teacher',
+                'title' => 'Maths Enginer',
                 'level' => 'Senior level',
                 'employment' => 'full time',
                 'education' => 'master',
