@@ -23,6 +23,12 @@ class PostController extends Controller
         ]);
     }
 
+    public function about()
+    {
+
+        return view('about')->with([]);
+    }
+
     public function create()
     {
         if (!auth()->user()->company) {

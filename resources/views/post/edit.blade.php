@@ -103,11 +103,11 @@
                                     <label for="">Tingkat Pendidikan</label>
                                     <select name="education_level" class="form-control"
                                         value="{{ $post->education_level }}">
-                                        <option value="Bachelors">Bachelors</option>
-                                        <option value="High School">High School</option>
+                                        <option value="SEE Mid School">SMP</option>
+                                        <option value="High School">SMA</option>
+                                        <option value="Bachelors">Sarjana</option>
                                         <option value="Master">Master</option>
-                                        <option value="SEE Mid School">SEE Mid School</option>
-                                        <option value="Other">Other</option>
+                                        <option value="Other">lainnyar</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -115,9 +115,9 @@
                                     <select name="experience" class="form-control" value="{{ $post->experience }}">
                                         <option value="Internship">Internship</option>
                                         <option value="Entry level">Entry level</option>
-                                        <option value="More than 1 year">More than 1 year</option>
-                                        <option value="More than 2 year">More than 2 year</option>
-                                        <option value="More than 5+ year">More than 5+ year</option>
+                                        <option value="More than 1 year">Lebih dari 1 tahun</option>
+                                        <option value="More than 2 year">Lebih dari 2 tahun</option>
+                                        <option value="More than 5+ year">Lebih dari 5+ tahun</option>
                                     </select>
                                 </div>
                             </div>

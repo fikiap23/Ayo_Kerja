@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 //public routes
 Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/about-us', [PostController::class, 'about'])->name('post.about');
 Route::get('/job/{job}', [PostController::class, 'show'])->name('post.show');
 Route::get('employer/{employer}', [AuthorController::class, 'employer'])->name('account.employer');
 
