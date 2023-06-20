@@ -55,6 +55,22 @@ class AccountController extends Controller
     {
         $application = new JobApplication;
         $user = User::find(auth()->user()->id);
+        // Memeriksa apakah cv valid
+        try {
+            $validatedData = $request->validate([
+                'cv' => 'required|mimes:pdf,docx|max:2048',
+            ], [
+                'cv.required' => 'File CV harus diunggah.',
+                'cv.mimes' => 'Format file CV harus PDF atau DOCX.',
+                'cv.max' => 'Ukuran file CV maksimal 2048 KB (2MB).',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            $errorMessages = $exception->validator->getMessageBag()->all();
+            $errorMessage = implode(' ', $errorMessages);
+            Alert::toast($errorMessage, 'warning');
+            return redirect()->back();
+        }
+
 
         if ($this->hasApplied($user, $request->post_id)) {
             Alert::toast('Anda telah melamar pekerjaan ini sebelumnya!', 'success');

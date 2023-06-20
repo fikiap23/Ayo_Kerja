@@ -59,15 +59,47 @@
                                             class="fas fa-share-square"></i> Simpan pekerjaan</a>
                                 </div>
                             </div>
-                            <div class="mb-3 d-flex justify-content-end">
+                            <div class="mb-3 d-flex justify-content-end ">
                                 <div class="small">
+
                                     <a href="{{ URL::previous() }}" class="btn primary-outline-btn">Batal</a>
-                                    <form action="{{ route('account.applyJob') }}" method="POST" class="d-inline-block">
+                                    <form action="{{ route('account.applyJob') }}" method="POST" class="d-inline-block"
+                                        enctype="multipart/form-data">
+                                        <div class="form-group ">
+                                            <div class="py-3">
+                                                <p>Upload CV</p>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="validatedCustomFile"
+                                                    name="cv" onchange="updateFileName(this)">
+                                                <label class="custom-file-label selected-file-name"
+                                                    for="validatedCustomFile">Pilih
+                                                    CV...</label>
+                                                <div id="selectedFileName" class="selected-file-name"></div>
+                                                @error('cv')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                        </div>
                                         @csrf
                                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                                         <button type="submit" class="btn primary-btn">Kirim Lamaran <i
                                                 class="fas fa-chevron-right"></i></a>
                                     </form>
+
+                                    <script>
+                                        function updateFileName(input) {
+                                            let fileName = input.files[0].name;
+                                            let label = input.nextElementSibling;
+                                            label.innerHTML = fileName;
+                                            let selectedFileName = document.getElementById("selectedFileName");
+                                            selectedFileName.innerHTML = fileName;
+                                        }
+                                    </script>
+
                                 </div>
                             </div>
                         </div>

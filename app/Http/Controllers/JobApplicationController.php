@@ -44,7 +44,7 @@ class JobApplicationController extends Controller
     {
         $application = JobApplication::find($request->application_id);
         $application->delete();
-        Alert::toast('Perushaan dihapus', 'warning');
+        Alert::toast('Pelamar dihapus', 'warning');
         return redirect()->route('jobApplication.index');
     }
 }

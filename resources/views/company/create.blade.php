@@ -21,13 +21,18 @@
                         <p>Logo Perusahaan</p>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="validatedCustomFile" name="logo" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Pilih logo...</label>
+                        <input type="file" class="custom-file-input" id="logoInput" name="logo"
+                            onchange="previewImage(this, 'logoPreview')" required>
+                        <label class="custom-file-label" id="logoLabel" for="logoInput">Pilih logo...</label>
                         @error('logo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                    <div class="mt-2">
+                        <img id="logoPreview" src="#" alt="Preview"
+                            style="max-width: 200px; max-height: 200px; display: none;">
                     </div>
                 </div>
 
@@ -65,15 +70,22 @@
                         <p>Banner/Cover Perusahaan</p>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="cover_img">
-                        <label class="custom-file-label">Pilih gambar cover...</label>
+                        <input type="file" class="custom-file-input" id="coverImgInput" name="cover_img"
+                            onchange="previewImageBannr(this, 'logoBannerPreview')">
+                        <label class="custom-file-label" id="coverImgLabel" for="coverImgInput">Pilih gambar
+                            cover...</label>
                         @error('cover_img')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
+                    <div class="mt-2">
+                        <img id="logoBannerPreview" src="#" alt="Preview"
+                            style="max-width: 200px; max-height: 200px; display: none;">
+                    </div>
                 </div>
+
 
                 <div class="pt-2">
                     <p class="mt-3 alert alert-primary">Berikan deskripsi singkat tentang perusahaan Anda</p>
@@ -95,4 +107,41 @@
             </form>
         </div>
     </div>
+    <script>
+        function previewImage(input, previewId) {
+            var fileName = input.value.split('\\').pop();
+            var label = document.getElementById('logoLabel');
+            label.innerText = fileName;
+            var preview = document.getElementById(previewId);
+            var label = document.getElementById(input.id + 'Label');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+            label.innerText = file.name;
+        }
+
+        function previewImageBannr(input, previewId) {
+            var fileName = input.value.split('\\').pop();
+            var label = document.getElementById('coverImgLabel');
+            label.innerText = fileName;
+            var preview = document.getElementById(previewId);
+            var label = document.getElementById(input.id + 'Label');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+            label.innerText = file.name;
+        }
+    </script>
 @endSection
