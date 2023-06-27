@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
+
 
 class AccountController extends Controller
 {
@@ -55,6 +57,7 @@ class AccountController extends Controller
     {
         $application = new JobApplication;
         $user = User::find(auth()->user()->id);
+
         // Memeriksa apakah cv valid
         try {
             $validatedData = $request->validate([
@@ -71,18 +74,30 @@ class AccountController extends Controller
             return redirect()->back();
         }
 
-
         if ($this->hasApplied($user, $request->post_id)) {
             Alert::toast('Anda telah melamar pekerjaan ini sebelumnya!', 'success');
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
+        // Simpan file CV ke folder storage/app/public/cv
+        $cvFile = $request->file('cv');
+        $cvPath = $cvFile->store('cv', 'public');
+
+
+        // Simpan URL CV di kolom 'cv' pada tabel 'users'
+        $user->cv = 'storage/' . $cvPath;
+
+        $user->save();
+
         $application->user_id = auth()->user()->id;
         $application->post_id = $request->post_id;
         $application->save();
+
         Alert::toast('Terima kasih telah melamar! Tunggu tanggapan perusahaan!', 'success');
         return redirect()->route('post.show', ['job' => $request->post_id]);
     }
+
+
 
     public function changePasswordView()
     {

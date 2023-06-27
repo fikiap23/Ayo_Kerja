@@ -7,7 +7,7 @@
                 <div class="login-container">
                     <div class="login-header mb-3">
                         <h3> <img src="{{ asset('images/logo/joblister.png') }}" width="50px;" alt=""> Masuk</h3>
-                        <p class="login-header-title">Selamat datang kembali di Job lister</p>
+                        <p class="login-header-title">Selamat datang kembali di Ayo Kerja</p>
                         <p class="text-muted">Masuk dengan alamat email dan kata sandi yang terdaftar.</p>
                     </div>
                     <div class="login-form">

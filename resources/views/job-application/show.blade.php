@@ -6,7 +6,7 @@
             Lamaran Pekerjaan
         </div>
         <div class="account-bdy p-3">
-            <p class="alert alert-primary">Pengguna dengan nama <span class="text-capitalize"> ({{ $applicant->name }})</span>
+            <p class="alert alert-primary">Pengguna dengan nama <span class="text-capitalize">{{ $applicant->name }}</span>
                 melamar pada listing Anda pada {{ $application->created_at }}</p>
             <div class="row">
                 <div class="col-sm-12 col-md-12 mb-5">
@@ -27,6 +27,11 @@
                                         title="klik untuk mengirim email">Kirim email kepada pengguna</a>
                                 </div>
                             </div>
+                            <div class="mt-3">
+                                <a href="{{ asset($applicant->cv) }}" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-file-pdf"></i> Lihat CV
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -41,9 +46,7 @@
                                     <img src="{{ asset($company->logo) }}" class="img-fluid" alt="">
                                 </div>
                                 <div class="col-9">
-                                    <p class="h4 text-info text-capitalize">
-                                        {{ $post->job_title }}
-                                    </p>
+                                    <p class="h4 text-info text-capitalize">{{ $post->job_title }}</p>
                                     <h6 class="text-uppercase">
                                         <a
                                             href="{{ route('account.employer', ['employer' => $company]) }}">{{ $company->title }}</a>
@@ -56,8 +59,9 @@
                             </div>
                             <div class="mb-3 d-flex justify-content-end">
                                 <div class="my-2">
-                                    <a href="{{ route('post.show', ['job' => $post]) }}" class="secondary-link"><i
-                                            class="fas fa-briefcase"></i> Lihat pekerjaan</a>
+                                    <a href="{{ route('post.show', ['job' => $post]) }}" class="secondary-link">
+                                        <i class="fas fa-briefcase"></i> Lihat pekerjaan
+                                    </a>
                                 </div>
                             </div>
                             <div class="mb-3 d-flex justify-content-end">

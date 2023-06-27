@@ -6,6 +6,8 @@ use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
+
 
 class JobApplicationController extends Controller
 {
@@ -33,11 +35,17 @@ class JobApplicationController extends Controller
         $applicant = User::find($userId);
 
         $company = $post->company()->first();
+
+        // Mengambil URL CV pengguna
+        $cvUrl = $applicant->cv;
+        $cvUrl = Storage::url($cvUrl); // Mengubah path relatif menjadi URL absolut
+
         return view('job-application.show')->with([
             'applicant' => $applicant,
             'post' => $post,
             'company' => $company,
-            'application' => $application
+            'application' => $application,
+            'cvUrl' => $cvUrl, // Menambahkan URL CV ke dalam data yang dikirimkan ke view
         ]);
     }
     public function destroy(Request $request)
