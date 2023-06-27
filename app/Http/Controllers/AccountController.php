@@ -30,6 +30,45 @@ class AccountController extends Controller
         return view('account.become-employer');
     }
 
+
+
+    public function uploadCV(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+
+        // Memeriksa apakah cv valid
+        try {
+            $validatedData = $request->validate([
+                'cv' => 'required|mimes:pdf,docx|max:2048',
+            ], [
+                'cv.required' => 'File CV harus diunggah.',
+                'cv.mimes' => 'Format file CV harus PDF atau DOCX.',
+                'cv.max' => 'Ukuran file CV maksimal 2048 KB (2MB).',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+            $errorMessages = $exception->validator->getMessageBag()->all();
+            $errorMessage = implode(' ', $errorMessages);
+            Alert::toast($errorMessage, 'warning');
+            return redirect()->back();
+        }
+
+        // Menghapus CV sebelumnya jika ada
+        if ($user->cv) {
+            Storage::disk('public')->delete($user->cv);
+        }
+
+        // Simpan file CV ke folder storage/app/public/cv
+        $cvFile = $request->file('cv');
+        $cvPath = $cvFile->store('cv', 'public');
+
+        // Simpan URL CV di kolom 'cv' pada tabel 'users'
+        $user->cv = 'storage/' . $cvPath;
+        $user->save();
+
+        // Memberikan informasi bahwa CV berhasil diunggah
+        Alert::toast('CV berhasil diunggah!', 'success');
+        return redirect()->route('account.index');
+    }
     public function becomeEmployer()
     {
         $user = User::find(auth()->user()->id);
@@ -58,36 +97,15 @@ class AccountController extends Controller
         $application = new JobApplication;
         $user = User::find(auth()->user()->id);
 
-        // Memeriksa apakah cv valid
-        try {
-            $validatedData = $request->validate([
-                'cv' => 'required|mimes:pdf,docx|max:2048',
-            ], [
-                'cv.required' => 'File CV harus diunggah.',
-                'cv.mimes' => 'Format file CV harus PDF atau DOCX.',
-                'cv.max' => 'Ukuran file CV maksimal 2048 KB (2MB).',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $exception) {
-            $errorMessages = $exception->validator->getMessageBag()->all();
-            $errorMessage = implode(' ', $errorMessages);
-            Alert::toast($errorMessage, 'warning');
-            return redirect()->back();
-        }
-
         if ($this->hasApplied($user, $request->post_id)) {
             Alert::toast('Anda telah melamar pekerjaan ini sebelumnya!', 'success');
             return redirect()->route('post.show', ['job' => $request->post_id]);
         }
 
-        // Simpan file CV ke folder storage/app/public/cv
-        $cvFile = $request->file('cv');
-        $cvPath = $cvFile->store('cv', 'public');
-
-
-        // Simpan URL CV di kolom 'cv' pada tabel 'users'
-        $user->cv = 'storage/' . $cvPath;
-
-        $user->save();
+        if (!$user->cv) {
+            Alert::toast('Anda harus mengunggah CV sebelum melamar!', 'warning');
+            return redirect()->route('account.index');
+        }
 
         $application->user_id = auth()->user()->id;
         $application->post_id = $request->post_id;
@@ -96,6 +114,8 @@ class AccountController extends Controller
         Alert::toast('Terima kasih telah melamar! Tunggu tanggapan perusahaan!', 'success');
         return redirect()->route('post.show', ['job' => $request->post_id]);
     }
+
+
 
 
 
