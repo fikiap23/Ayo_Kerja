@@ -10,19 +10,19 @@ Penerimaan Karyawan Baru Berbasis Web
 
 Dipersiapkan oleh:
 
-Faiz Khoirurrizqi Noor 1217050053
+-   Faiz Khoirurrizqi Noor 1217050053
 
-Fiki Aprian 1217050058
+-   Fiki Aprian 1217050058
 
-Haiqel Aziizul Hakeem 1217050060
+-   Haiqel Aziizul Hakeem 1217050060
 
-Irwanto Danang Bahtiar 1217050070
+-   Irwanto Danang Bahtiar 1217050070
 
-Muhammad Dwiki Septianto 1217050089
+-   Muhammad Dwiki Septianto 1217050089
 
-Muhammad Gifa Algifari 1217050096
+-   Muhammad Gifa Algifari 1217050096
 
-Muhammad Ikhsan Nurhalim 1217050097
+-   Muhammad Ikhsan Nurhalim 1217050097
 
 #### Link Dokumen SKPL : https://docs.google.com/document/d/166dSujWddGR3L-GPweCOO5oJOzdZRaP5/edit?usp=drivesdk&ouid=118209423897917738245&rtpof=true&sd=true
 
