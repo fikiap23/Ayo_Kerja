@@ -24,8 +24,6 @@ Dipersiapkan oleh:
 
 -   Muhammad Ikhsan Nurhalim 1217050097
 
-#### Link Dokumen SKPL : https://docs.google.com/document/d/166dSujWddGR3L-GPweCOO5oJOzdZRaP5/edit?usp=drivesdk&ouid=118209423897917738245&rtpof=true&sd=true
-
 #### Link Youtube Penjelasan SKPL dan Program Ayo Kerja : https://youtu.be/UrU_i_I5uvs
 
 #### Link Aplikasi:
